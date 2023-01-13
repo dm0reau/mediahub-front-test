@@ -1,12 +1,31 @@
 import { Component } from '@angular/core';
 import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  constructor(private readonly loginService: LoginService) {}
+  username = '';
+  password = '';
+  hasInvalidCredentials = false;
+  submitActionDisabled = false;
 
-  submit() {}
+  constructor(
+    private readonly loginService: LoginService,
+    private readonly router: Router
+  ) {}
+
+  async submit() {
+    this.submitActionDisabled = true;
+
+    if (await this.loginService.validate(this.username, this.password)) {
+      await this.router.navigate(['/movies']);
+      return;
+    }
+
+    this.submitActionDisabled = false;
+    this.hasInvalidCredentials = true;
+  }
 }

@@ -1,14 +1,19 @@
 <main class="container">
   <h1>Se connecter</h1>
+
+  <p *ngIf="hasInvalidCredentials" class="alert alert-danger" role="alert">
+    Vos identifiants semblent invalides. Veuillez réessayer.
+  </p>
+
   <form (submit)="submit()">
     <div class="mb-3">
       <label for="username" class="form-label">Nom d'utilisateur</label>
-      <input type="text" class="form-control" id="username" tabindex="1">
+      <input [(ngModel)]="username" type="text" class="form-control" id="username" name="username" tabindex="1">
     </div>
     <div class="mb-3">
       <label for="password" class="form-label">Mot de passe</label>
-      <input type="password" class="form-control" id="password" tabindex="2">
+      <input [(ngModel)]="password" type="password" class="form-control" id="password" name="password" tabindex="2">
     </div>
-    <button type="submit" class="btn btn-primary" tabindex="3">Connexion</button>
+    <button [disabled]="submitActionDisabled" type="submit" class="btn btn-primary" tabindex="3">Connexion</button>
   </form>
 </main>
