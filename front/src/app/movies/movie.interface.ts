@@ -13,3 +13,5 @@ export interface Movie {
   director?: string;
   rottenTomatoesRating?: string;
 }
+
+export type MovieList = ReadonlyArray<Movie>;
