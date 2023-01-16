@@ -4,14 +4,14 @@ import { AuthGateway } from '../ports/auth.gateway';
 const VALID_USERNAME = 'Canal-plus';
 const VALID_PASSWORD = 'Super-secret';
 const VALID_TOKEN = 'validToken';
-const LOCAL_STORAGE_KEY = 'authToken';
 
 export class InMemoryAuthGateway implements AuthGateway {
+  private token = '';
   private isLoggedIn$ = new BehaviorSubject<boolean>(this.hasToken());
 
   validate(username: string, password: string): Observable<boolean> {
     if (this.isValidCredentials(username, password)) {
-      localStorage.setItem(LOCAL_STORAGE_KEY, VALID_TOKEN);
+      this.addToken(VALID_TOKEN);
       this.isLoggedIn$.next(true);
       return of(true);
     }
@@ -20,7 +20,7 @@ export class InMemoryAuthGateway implements AuthGateway {
   }
 
   invalidate(): Observable<null> {
-    localStorage.removeItem(LOCAL_STORAGE_KEY);
+    this.removeToken();
     this.isLoggedIn$.next(false);
     return of(null);
   }
@@ -33,7 +33,15 @@ export class InMemoryAuthGateway implements AuthGateway {
     return username === VALID_USERNAME && password === VALID_PASSWORD;
   }
 
+  private addToken(token: string) {
+    this.token = token;
+  }
+
+  private removeToken() {
+    this.token = '';
+  }
+
   private hasToken() {
-    return localStorage.getItem(LOCAL_STORAGE_KEY) !== null;
+    return this.token.length > 0;
   }
 }
