@@ -14,4 +14,4 @@ export interface Movie {
   rottenTomatoesRating?: string;
 }
 
-export type MovieList = ReadonlyArray<Movie>;
+export type MoviesList = ReadonlyArray<Movie>;

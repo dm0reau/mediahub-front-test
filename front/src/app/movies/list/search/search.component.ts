@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SearchService } from './search.service';
 
 @Component({
   selector: 'search',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent {
-  search = '';
+  keywords = '';
+
+  constructor(private readonly searchService: SearchService) {}
+
+  search() {
+    this.searchService.search(this.keywords);
+  }
 }

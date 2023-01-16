@@ -1,3 +1,21 @@
 <main class="container">
   <search></search>
+  <table class="table" *ngIf="(movies$ | async)?.length">
+    <thead>
+      <tr>
+        <th>Titre</th>
+        <th>Note Rotten Tomatoes</th>
+        <th>Note IMDB</th>
+        <th>Votes IMDB</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let movie of (movies$ | async)">
+      <tr>
+        <td>{{ movie.title }}</td>
+        <td>{{ movie.rottenTomatoesRating }}</td>
+        <td>{{ movie.imdbRating }}</td>
+        <td>{{ movie.imdbVotes }}</td>
+      </tr>
+    </tbody>
+  </table>
 </main>
