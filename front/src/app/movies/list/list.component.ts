@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { MoviesList } from '../../../domain/models/movies-list';
 
 @Component({
-  selector: 'list',
+  selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })

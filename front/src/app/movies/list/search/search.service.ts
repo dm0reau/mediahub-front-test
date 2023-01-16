@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { MoviesListState } from '../movies-list-state.service';
 import { MoviesGateway } from '../../../../domain/ports/movies.gateway';
 
@@ -6,6 +6,7 @@ import { MoviesGateway } from '../../../../domain/ports/movies.gateway';
 export class SearchService {
   constructor(
     private readonly moviesListState: MoviesListState,
+    @Inject('MoviesGateway')
     private readonly moviesGateway: MoviesGateway
   ) {}
 

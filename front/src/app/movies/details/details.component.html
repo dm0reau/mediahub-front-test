@@ -1,1 +1,10 @@
-<p>details works!</p>
+<main class="container">
+  <ng-template [ngIf]="isLoading">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </ng-template>
+  <ng-template [ngIf]="movie">
+    <h1>{{ movie.title }}</h1>
+  </ng-template>
+</main>

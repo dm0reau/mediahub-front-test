@@ -13,13 +13,13 @@ import { InMemoryMoviesGateway } from '../../domain/adapters/in-memory-movies-ga
 @NgModule({
   declarations: [ListComponent, SearchComponent, DetailsComponent],
   providers: [
-    MoviesListState,
-    MovieDetailsService,
-    SearchService,
     {
       provide: 'MoviesGateway',
       useClass: InMemoryMoviesGateway,
     },
+    MoviesListState,
+    MovieDetailsService,
+    SearchService,
   ],
   imports: [CommonModule, MoviesRoutingModule, FormsModule],
 })
