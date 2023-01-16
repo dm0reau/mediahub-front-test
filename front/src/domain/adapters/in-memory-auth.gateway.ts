@@ -16,6 +16,11 @@ export class InMemoryAuthGateway implements AuthGateway {
     return of(false);
   }
 
+  invalidate(): Observable<null> {
+    localStorage.removeItem(LOCAL_STORAGE_KEY);
+    return of(null);
+  }
+
   isLoggedIn(): boolean {
     return localStorage.getItem(LOCAL_STORAGE_KEY) !== null;
   }

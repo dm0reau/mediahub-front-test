@@ -1,0 +1,10 @@
+<nav *ngIf="isLoggedIn">
+  <ul class="nav">
+    <li class="nav-item">
+      <a href="/movies" class="nav-link">Liste des films</a>
+    </li>
+    <li class="nav-item justify-content-end">
+      <button (click)="disconnect()" class="btn btn-danger">Se déconnecter</button>
+    </li>
+  </ul>
+</nav>

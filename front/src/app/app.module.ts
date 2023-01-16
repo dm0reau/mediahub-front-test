@@ -5,9 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { InMemoryAuthGateway } from '../domain/adapters/in-memory-auth.gateway';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent],
+  declarations: [AppComponent, PageNotFoundComponent, NavComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [
     {
