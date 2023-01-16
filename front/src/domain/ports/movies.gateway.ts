@@ -5,5 +5,5 @@ import { Movie } from '../models/movie';
 export interface MoviesGateway {
   searchMovies(): Observable<MoviesList>;
 
-  findMovie(id: number): Observable<Movie | null>;
+  findMovie(id: number): Observable<Movie>;
 }
