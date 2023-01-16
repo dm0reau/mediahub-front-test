@@ -5,5 +5,5 @@ export interface AuthGateway {
 
   invalidate(): Observable<null>;
 
-  isLoggedIn(): boolean;
+  isLoggedIn(): Observable<boolean>;
 }

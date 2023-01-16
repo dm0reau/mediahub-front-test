@@ -7,6 +7,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { AuthGateway } from '../../domain/ports/auth.gateway';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,11 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean | UrlTree> {
-    if (this.authGateway.isLoggedIn()) return true;
+    const isLoggedIn = await firstValueFrom(this.authGateway.isLoggedIn());
+    if (isLoggedIn) {
+      return true;
+    }
+
     await this.router.navigate(['/auth/login']);
     return false;
   }

@@ -10,7 +10,7 @@ export class MoviesListState {
     this.movies$.next([]);
   }
 
-  listenTo() {
+  observable() {
     return this.movies$.asObservable();
   }
 

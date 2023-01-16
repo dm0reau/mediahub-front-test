@@ -1,17 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MoviesListState } from './movies-list.state';
-import { Observable } from 'rxjs';
 import { MoviesList } from '../../../domain/models/movies-list';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent {
-  movies$: Observable<MoviesList>;
+export class ListComponent implements OnInit, OnDestroy {
+  movies: MoviesList = [];
+  private moviesSub$?: Subscription;
 
-  constructor(private readonly moviesListService: MoviesListState) {
-    this.movies$ = this.moviesListService.listenTo();
+  constructor(private readonly moviesListService: MoviesListState) {}
+
+  ngOnInit(): void {
+    this.moviesSub$ = this.moviesListService
+      .observable()
+      .subscribe((movies) => (this.movies = movies));
+  }
+
+  ngOnDestroy() {
+    this.moviesSub$?.unsubscribe();
   }
 }
