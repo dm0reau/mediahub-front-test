@@ -1,35 +1,22 @@
 import { Injectable } from '@angular/core';
-import { MoviesListService } from '../movies-list.service';
+import { MoviesListState } from '../movies-list-state.service';
+import { MoviesGateway } from '../../../../domain/ports/movies.gateway';
 
 @Injectable()
 export class SearchService {
-  constructor(private readonly moviesListService: MoviesListService) {}
+  constructor(
+    private readonly moviesListState: MoviesListState,
+    private readonly moviesGateway: MoviesGateway
+  ) {}
 
   search(keywords: string) {
     if (keywords.length === 0) {
-      this.moviesListService.next([]);
+      this.moviesListState.next([]);
       return;
     }
 
-    this.moviesListService.next([
-      {
-        id: 1,
-        title: 'Le Grand Bleu',
-        imdbRating: 8,
-        imdbVotes: 120,
-        rottenTomatoesRating: '80%',
-        usGross: 1000,
-        usDvdSales: 100,
-      },
-      {
-        id: 2,
-        title: 'La Grande Vadrouille',
-        usGross: 0,
-        imdbRating: 9,
-        imdbVotes: 20,
-        rottenTomatoesRating: '90%',
-        usDvdSales: 0,
-      },
-    ]);
+    this.moviesGateway
+      .searchMovies()
+      .subscribe((movies) => this.moviesListState.next(movies));
   }
 }

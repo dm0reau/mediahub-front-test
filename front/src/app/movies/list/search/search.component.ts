@@ -4,7 +4,6 @@ import { SearchService } from './search.service';
 @Component({
   selector: 'search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent {
   keywords = '';

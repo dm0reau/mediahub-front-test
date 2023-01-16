@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { MoviesList } from '../movie.interface';
+import { MoviesList } from '../../../domain/models/movies-list';
 
 @Injectable()
-export class MoviesListService {
+export class MoviesListState {
   private readonly movies$ = new Subject<MoviesList>();
 
   constructor() {

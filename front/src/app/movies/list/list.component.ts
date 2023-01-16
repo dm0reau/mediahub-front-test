@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { MoviesListService } from './movies-list.service';
-import { MoviesList } from '../movie.interface';
+import { MoviesListState } from './movies-list-state.service';
 import { Observable } from 'rxjs';
+import { MoviesList } from '../../../domain/models/movies-list';
 
 @Component({
   selector: 'list',
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class ListComponent {
   movies$: Observable<MoviesList>;
 
-  constructor(private readonly moviesListService: MoviesListService) {
+  constructor(private readonly moviesListService: MoviesListState) {
     this.movies$ = this.moviesListService.listenTo();
   }
 }
