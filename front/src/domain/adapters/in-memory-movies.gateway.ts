@@ -5,10 +5,12 @@ import { MoviesList } from '../models/movies-list';
 
 export class InMemoryMoviesGateway implements MoviesGateway {
   findMovie(id: number): Observable<Movie> {
-    if (!moviesData[id]) {
-      throw new NotFoundError(`Not found with ID ${id} not found`);
+    const dataIndex = id - 1;
+
+    if (!moviesData[dataIndex]) {
+      throw new NotFoundError(`Movie with ID ${id} not found`);
     }
-    return of(moviesData[id]);
+    return of(moviesData[dataIndex]);
   }
 
   searchMovies(): Observable<MoviesList> {

@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { MoviesListState } from '../movies-list-state.service';
+import { MoviesListState } from '../movies-list.state';
 import { MoviesGateway } from '../../../../domain/ports/movies.gateway';
 
 @Injectable()

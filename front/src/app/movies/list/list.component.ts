@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MoviesListState } from './movies-list-state.service';
+import { MoviesListState } from './movies-list.state';
 import { Observable } from 'rxjs';
 import { MoviesList } from '../../../domain/models/movies-list';
 
