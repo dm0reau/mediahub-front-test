@@ -24,7 +24,7 @@ export class InMemoryMovieGateway implements MovieGateway {
   }
 }
 
-const moviesData = [
+const moviesData: MoviesList = [
   {
     id: 1,
     title: 'Le Grand Bleu',
@@ -33,6 +33,12 @@ const moviesData = [
     rottenTomatoesRating: '80%',
     usGross: 1000,
     usDvdSales: 100,
+    productionBudget: 500,
+    worldwideGross: 2000,
+    director: 'Luc Besson',
+    releaseDate: '1988/05/11',
+    majorGenre: 'Drame',
+    distributor: 'Sony Pictures',
   },
   {
     id: 2,
@@ -40,7 +46,13 @@ const moviesData = [
     usGross: 0,
     imdbRating: 9,
     imdbVotes: 20,
+    worldwideGross: 200,
+    productionBudget: 200,
     rottenTomatoesRating: '90%',
     usDvdSales: 0,
+    distributor: 'Studio Canal',
+    director: 'Gérard Oury',
+    releaseDate: '1966/12/8',
+    majorGenre: 'Comédie',
   },
 ];

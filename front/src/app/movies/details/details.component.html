@@ -4,7 +4,36 @@
       <span class="visually-hidden">Loading...</span>
     </div>
   </ng-template>
+
   <ng-template [ngIf]="movie">
-    <h1>{{ movie.title }}</h1>
+    <button routerLink="/movies" class="btn btn-link col">
+      <i class="bi bi-arrow-left-circle"></i>
+      Revenir à la liste
+    </button>
+
+    <h1 class="col">{{ movie.title }}</h1>
+
+    <div class="row">
+      <section class="card col-sm">
+        <h2>Détails</h2>
+        <p><strong>Genre principal</strong> : {{ movie.majorGenre }}</p>
+        <p><strong>Date de sortie</strong> : {{ movie.releaseDate | date: 'dd/MM/yyyy' }}</p>
+        <p><strong>Directeur</strong> : {{ movie.director }}</p>
+        <p><strong>Distributeur</strong> : {{ movie.distributor }}</p>
+      </section>
+      <section class="card col-sm">
+        <h2>Avis</h2>
+        <p><strong>Note Rotten Tomatoes</strong> : {{ movie.rottenTomatoesRating }}</p>
+        <p><strong>Note IMDB</strong> : {{ movie.imdbRating }} / 10</p>
+        <p><strong>Votes IMDB</strong> : {{ movie.imdbVotes }}</p>
+      </section>
+      <section class="card col-sm">
+        <h2>Recettes</h2>
+        <p><strong>Budget</strong> : {{ movie.productionBudget }}</p>
+        <p><strong>Recette mondiale</strong> : {{ movie.worldwideGross }}</p>
+        <p><strong>Recette aux US</strong> : {{ movie.usGross }}</p>
+        <p><strong>Ventes de DVD</strong> : {{ movie.usDvdSales }}</p>
+      </section>
+    </div>
   </ng-template>
 </main>
