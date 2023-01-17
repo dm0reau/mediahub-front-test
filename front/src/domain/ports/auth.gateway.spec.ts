@@ -1,11 +1,15 @@
 import { AuthGateway } from './auth.gateway';
 import { InMemoryAuthGateway } from '../adapters/in-memory-auth.gateway';
 import { lastValueFrom } from 'rxjs';
+import { InMemoryAuthTokenRepository } from '../adapters/in-memory-auth-token.repository';
+import { AuthTokenRepository } from './auth-token.repository';
 
 let authGateway: AuthGateway;
+let authTokenRepository: AuthTokenRepository;
 
 beforeEach(() => {
-  authGateway = new InMemoryAuthGateway();
+  authTokenRepository = new InMemoryAuthTokenRepository();
+  authGateway = new InMemoryAuthGateway(authTokenRepository);
 });
 
 it('validates with valid credentials', async () => {

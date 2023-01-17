@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { InMemoryAuthGateway } from '../domain/adapters/in-memory-auth.gateway';
 import { NavComponent } from './nav/nav.component';
+import { LocalStorageAuthTokenRepository } from '../domain/adapters/local-storage-auth-token.repository';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, NavComponent],
@@ -13,7 +14,8 @@ import { NavComponent } from './nav/nav.component';
   providers: [
     {
       provide: 'AuthGateway',
-      useClass: InMemoryAuthGateway,
+      useFactory: () =>
+        new InMemoryAuthGateway(new LocalStorageAuthTokenRepository()),
     },
   ],
   bootstrap: [AppComponent],

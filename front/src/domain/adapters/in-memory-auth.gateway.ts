@@ -1,17 +1,21 @@
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { AuthGateway } from '../ports/auth.gateway';
+import { AuthTokenRepository } from '../ports/auth-token.repository';
 
 const VALID_USERNAME = 'Canal-plus';
 const VALID_PASSWORD = 'Super-secret';
 const VALID_TOKEN = 'validToken';
 
 export class InMemoryAuthGateway implements AuthGateway {
-  private token = '';
-  private isLoggedIn$ = new BehaviorSubject<boolean>(this.hasToken());
+  private isLoggedIn$ = new BehaviorSubject<boolean>(false);
+
+  constructor(private readonly authTokenRepository: AuthTokenRepository) {
+    this.isLoggedIn$.next(this.authTokenRepository.hasToken());
+  }
 
   validate(username: string, password: string): Observable<boolean> {
     if (this.isValidCredentials(username, password)) {
-      this.addToken(VALID_TOKEN);
+      this.authTokenRepository.add(VALID_TOKEN);
       this.isLoggedIn$.next(true);
       return of(true);
     }
@@ -20,7 +24,7 @@ export class InMemoryAuthGateway implements AuthGateway {
   }
 
   invalidate(): Observable<null> {
-    this.removeToken();
+    this.authTokenRepository.remove();
     this.isLoggedIn$.next(false);
     return of(null);
   }
@@ -31,17 +35,5 @@ export class InMemoryAuthGateway implements AuthGateway {
 
   private isValidCredentials(username: string, password: string): boolean {
     return username === VALID_USERNAME && password === VALID_PASSWORD;
-  }
-
-  private addToken(token: string) {
-    this.token = token;
-  }
-
-  private removeToken() {
-    this.token = '';
-  }
-
-  private hasToken() {
-    return this.token.length > 0;
   }
 }
