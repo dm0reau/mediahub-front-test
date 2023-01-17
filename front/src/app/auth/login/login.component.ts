@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthGateway } from '../../../domain/ports/auth.gateway';
+import { AuthGateway } from '../../../domain/auth/ports/auth.gateway';
 import { lastValueFrom } from 'rxjs';
 
 @Component({
@@ -28,7 +28,7 @@ export class LoginComponent {
         { defaultValue: false }
       )
     ) {
-      await this.router.navigate(['/movies']);
+      await this.router.navigate(['/movie']);
       return;
     }
 

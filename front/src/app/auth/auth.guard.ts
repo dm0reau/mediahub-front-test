@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { AuthGateway } from '../../domain/ports/auth.gateway';
+import { AuthGateway } from '../../domain/auth/ports/auth.gateway';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({

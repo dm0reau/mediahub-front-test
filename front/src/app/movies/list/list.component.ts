@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MoviesListState } from './movies-list.state';
-import { MoviesList } from '../../../domain/models/movies-list';
+import { MoviesList } from '../../../domain/movie/models/movies-list';
 import { Subscription } from 'rxjs';
 
 @Component({

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs';
 import { MovieDetailsService } from './movie-details.service';
-import { Movie } from '../../../domain/models/movie';
+import { Movie } from '../../../domain/movie/models/movie';
 
 @Component({
   selector: 'app-details',

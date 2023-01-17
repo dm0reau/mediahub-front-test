@@ -1,15 +1,15 @@
-import { MoviesGateway } from './movies.gateway';
+import { MovieGateway } from './movie.gateway';
 import { firstValueFrom, lastValueFrom, NotFoundError } from 'rxjs';
-import { InMemoryMoviesGateway } from '../adapters/in-memory-movies.gateway';
+import { InMemoryMovieGateway } from '../adapters/in-memory-movie.gateway';
 
-let moviesGateway: MoviesGateway;
+let moviesGateway: MovieGateway;
 
 beforeEach(() => {
-  moviesGateway = new InMemoryMoviesGateway();
+  moviesGateway = new InMemoryMovieGateway();
 });
 
-describe('movies search', () => {
-  it("doesn't find anything when keywords aren't in movies titles", async () => {
+describe('movie search', () => {
+  it("doesn't find anything when keywords aren't in movie titles", async () => {
     const movies = await lastValueFrom(moviesGateway.searchMovies('rouge'));
 
     expect(movies).toEqual([]);
@@ -31,7 +31,7 @@ describe('movies search', () => {
     ]);
   });
 
-  it('finds many movies by their titles', async () => {
+  it('finds many movie by their titles', async () => {
     const movies = await lastValueFrom(moviesGateway.searchMovies('le'));
 
     expect(movies).toEqual([
@@ -57,7 +57,7 @@ describe('movies search', () => {
   });
 });
 
-describe('movies query by id', () => {
+describe('movie query by id', () => {
   it("raises an error when the given ID doesn't exists", () => {
     expect(firstValueFrom(moviesGateway.findMovie(999))).rejects.toThrow(
       NotFoundError

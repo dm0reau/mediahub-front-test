@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { AuthGateway } from '../../domain/ports/auth.gateway';
+import { AuthGateway } from '../../domain/auth/ports/auth.gateway';
 import { Router } from '@angular/router';
 import { lastValueFrom, Observable } from 'rxjs';
 

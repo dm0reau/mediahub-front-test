@@ -1,9 +1,9 @@
-import { MoviesGateway } from '../ports/movies.gateway';
+import { MovieGateway } from '../ports/movie.gateway';
 import { Movie } from '../models/movie';
 import { map, NotFoundError, Observable, of } from 'rxjs';
 import { MoviesList } from '../models/movies-list';
 
-export class InMemoryMoviesGateway implements MoviesGateway {
+export class InMemoryMovieGateway implements MovieGateway {
   findMovie(id: number): Observable<Movie> {
     return of(id - 1).pipe(
       map((dataIndex) => {

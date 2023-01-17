@@ -8,14 +8,14 @@ import { MoviesListState } from './list/movies-list.state';
 import { SearchService } from './list/search/search.service';
 import { DetailsComponent } from './details/details.component';
 import { MovieDetailsService } from './details/movie-details.service';
-import { InMemoryMoviesGateway } from '../../domain/adapters/in-memory-movies.gateway';
+import { InMemoryMovieGateway } from '../../domain/movie/adapters/in-memory-movie.gateway';
 
 @NgModule({
   declarations: [ListComponent, SearchComponent, DetailsComponent],
   providers: [
     {
       provide: 'MoviesGateway',
-      useClass: InMemoryMoviesGateway,
+      useClass: InMemoryMovieGateway,
     },
     MoviesListState,
     MovieDetailsService,
