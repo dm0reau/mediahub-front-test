@@ -28,7 +28,7 @@ export class LoginComponent {
         { defaultValue: false }
       )
     ) {
-      await this.router.navigate(['/movie']);
+      await this.router.navigate(['/movies']);
       return;
     }
 
