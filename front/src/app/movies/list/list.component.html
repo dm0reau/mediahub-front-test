@@ -9,8 +9,8 @@
         <th>Votes IMDB</th>
       </tr>
     </thead>
-    <tbody *ngFor="let movie of movies">
-      <tr>
+    <tbody>
+      <tr *ngFor="let movie of movies" [routerLink]="'/movies/' + movie.id">
         <td>{{ movie.title }}</td>
         <td>{{ movie.rottenTomatoesRating }}</td>
         <td>{{ movie.imdbRating }}</td>
