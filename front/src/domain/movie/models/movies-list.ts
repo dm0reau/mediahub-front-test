@@ -1,3 +1,3 @@
 import { Movie } from './movie';
 
-export type MoviesList = ReadonlyArray<Movie>;
+export type MoviesList = Array<Movie>;

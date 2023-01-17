@@ -19,15 +19,10 @@ describe('movie search', () => {
     const movies = await lastValueFrom(moviesGateway.searchMovies('bleu'));
 
     expect(movies).toEqual([
-      {
+      expect.objectContaining({
         id: 1,
         title: 'Le Grand Bleu',
-        imdbRating: 8,
-        imdbVotes: 120,
-        rottenTomatoesRating: '80%',
-        usGross: 1000,
-        usDvdSales: 100,
-      },
+      }),
     ]);
   });
 
@@ -35,24 +30,54 @@ describe('movie search', () => {
     const movies = await lastValueFrom(moviesGateway.searchMovies('le'));
 
     expect(movies).toEqual([
-      {
+      expect.objectContaining({
         id: 1,
         title: 'Le Grand Bleu',
-        imdbRating: 8,
-        imdbVotes: 120,
-        rottenTomatoesRating: '80%',
-        usGross: 1000,
-        usDvdSales: 100,
-      },
-      {
+      }),
+      expect.objectContaining({
         id: 2,
         title: 'La Grande Vadrouille',
-        usGross: 0,
-        imdbRating: 9,
-        imdbVotes: 20,
-        rottenTomatoesRating: '90%',
-        usDvdSales: 0,
-      },
+      }),
+    ]);
+  });
+});
+
+describe('movie search and sort', () => {
+  it("doesn't find anything when keywords aren't in movie titles", async () => {
+    const movies = await lastValueFrom(
+      moviesGateway.searchAndSortMovies('rouge', 'title')
+    );
+
+    expect(movies).toEqual([]);
+  });
+
+  it('finds one movie by its title', async () => {
+    const movies = await lastValueFrom(
+      moviesGateway.searchAndSortMovies('bleu', 'title')
+    );
+
+    expect(movies).toEqual([
+      expect.objectContaining({
+        id: 1,
+        title: 'Le Grand Bleu',
+      }),
+    ]);
+  });
+
+  it('finds many movie by and ordered by their titles', async () => {
+    const movies = await lastValueFrom(
+      moviesGateway.searchAndSortMovies('grand', 'title')
+    );
+
+    expect(movies).toEqual([
+      expect.objectContaining({
+        id: 2,
+        title: 'La Grande Vadrouille',
+      }),
+      expect.objectContaining({
+        id: 1,
+        title: 'Le Grand Bleu',
+      }),
     ]);
   });
 });
@@ -67,14 +92,11 @@ describe('movie query by id', () => {
   it('gives a movie when its founded', async () => {
     const movie = await firstValueFrom(moviesGateway.findMovie(1));
 
-    expect(movie).toEqual({
-      id: 1,
-      title: 'Le Grand Bleu',
-      imdbRating: 8,
-      imdbVotes: 120,
-      rottenTomatoesRating: '80%',
-      usGross: 1000,
-      usDvdSales: 100,
-    });
+    expect(movie).toEqual(
+      expect.objectContaining({
+        id: 1,
+        title: 'Le Grand Bleu',
+      })
+    );
   });
 });

@@ -22,6 +22,26 @@ export class InMemoryMovieGateway implements MovieGateway {
       )
     );
   }
+
+  searchAndSortMovies(
+    keywords: string,
+    sortBy: keyof Movie
+  ): Observable<MoviesList> {
+    return this.searchMovies(keywords).pipe(
+      map((movies) =>
+        movies.sort((firstMovie, secondMovie) => {
+          const firstMovieAttribute = firstMovie[sortBy];
+          const secondMovieAttribute = secondMovie[sortBy];
+
+          if (!firstMovieAttribute || !secondMovieAttribute) {
+            return 1;
+          }
+
+          return firstMovieAttribute < secondMovieAttribute ? -1 : 1;
+        })
+      )
+    );
+  }
 }
 
 const moviesData: MoviesList = [
