@@ -11,12 +11,9 @@ export class SearchService {
     private readonly moviesListState: MoviesListState,
     @Inject('MoviesGateway')
     private readonly moviesGateway: MovieGateway
-  ) {
-    console.log('search service constructor');
-  }
+  ) {}
 
   search(keywords: string) {
-    console.log({ keywords });
     this.keywords$.next(keywords);
 
     if (keywords.length === 0) {
@@ -31,5 +28,10 @@ export class SearchService {
 
   keywords(): Observable<string> {
     return this.keywords$.asObservable();
+  }
+
+  clear() {
+    this.keywords$.next('');
+    this.moviesListState.next([]);
   }
 }

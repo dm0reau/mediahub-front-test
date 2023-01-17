@@ -22,6 +22,10 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.searchService.search(this.keywords);
   }
 
+  clear() {
+    this.searchService.clear();
+  }
+
   ngOnDestroy() {
     this.keywordsSub$?.unsubscribe();
   }
