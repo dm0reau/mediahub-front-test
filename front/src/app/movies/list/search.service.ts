@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { MoviesListState } from './movies-list.state';
 import { MovieGateway } from '../../../domain/movie/ports/movie.gateway';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Movie } from '../../../domain/movie/models/movie';
+import { MovieSortAttribute } from '../../../domain/movie/models/movie-sort-attribute';
 
 @Injectable()
 export class SearchService {
@@ -27,7 +27,7 @@ export class SearchService {
       .subscribe((movies) => this.moviesListState.next(movies));
   }
 
-  searchAndSort(keywords: string, sortBy: keyof Movie) {
+  searchAndSort(keywords: string, sortBy: MovieSortAttribute) {
     this.keywords$.next(keywords);
 
     if (keywords.length === 0) {

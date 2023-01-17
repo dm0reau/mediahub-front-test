@@ -3,10 +3,10 @@
   <table class="table" *ngIf="movies.length > 0">
     <thead>
       <tr>
-        <th>Titre</th>
-        <th>Note Rotten Tomatoes</th>
-        <th>Note IMDB</th>
-        <th>Votes IMDB</th>
+        <th app-sorter title="Titre" sortBy="title"></th>
+        <th app-sorter title="Note Rotten Tomatoes" sortBy="rottenTomatoesRating"></th>
+        <th app-sorter title="Note IMDB" sortBy="imdbRating"></th>
+        <th app-sorter title="Votes IMDB" sortBy="imdbVotes"></th>
       </tr>
     </thead>
     <tbody>

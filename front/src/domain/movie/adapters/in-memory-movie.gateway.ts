@@ -2,6 +2,7 @@ import { MovieGateway } from '../ports/movie.gateway';
 import { Movie } from '../models/movie';
 import { map, NotFoundError, Observable, of } from 'rxjs';
 import { MoviesList } from '../models/movies-list';
+import { MovieSortAttribute } from '../models/movie-sort-attribute';
 
 export class InMemoryMovieGateway implements MovieGateway {
   findMovie(id: number): Observable<Movie> {
@@ -25,7 +26,7 @@ export class InMemoryMovieGateway implements MovieGateway {
 
   searchAndSortMovies(
     keywords: string,
-    sortBy: keyof Movie
+    sortBy: MovieSortAttribute
   ): Observable<MoviesList> {
     return this.searchMovies(keywords).pipe(
       map((movies) =>
