@@ -2,7 +2,11 @@ import { AuthGateway } from './auth.gateway';
 import { InMemoryAuthGateway } from '../adapters/in-memory-auth.gateway';
 import { lastValueFrom } from 'rxjs';
 
-const authGateway: AuthGateway = new InMemoryAuthGateway();
+let authGateway: AuthGateway;
+
+beforeEach(() => {
+  authGateway = new InMemoryAuthGateway();
+});
 
 it('validates with valid credentials', async () => {
   const isValid = await lastValueFrom(

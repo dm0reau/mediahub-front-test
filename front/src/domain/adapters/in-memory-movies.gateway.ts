@@ -13,8 +13,12 @@ export class InMemoryMoviesGateway implements MoviesGateway {
     return of(moviesData[dataIndex]);
   }
 
-  searchMovies(): Observable<MoviesList> {
-    return of(moviesData);
+  searchMovies(keywords: string): Observable<MoviesList> {
+    return of(
+      moviesData.filter((movie) => {
+        return movie.title.toLowerCase().includes(keywords.toLowerCase());
+      })
+    );
   }
 }
 

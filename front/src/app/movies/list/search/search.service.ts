@@ -17,7 +17,7 @@ export class SearchService {
     }
 
     this.moviesGateway
-      .searchMovies()
+      .searchMovies(keywords)
       .subscribe((movies) => this.moviesListState.next(movies));
   }
 }

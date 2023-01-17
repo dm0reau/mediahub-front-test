@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Movie } from '../models/movie';
 
 export interface MoviesGateway {
-  searchMovies(): Observable<MoviesList>;
+  searchMovies(keywords: string): Observable<MoviesList>;
 
   findMovie(id: number): Observable<Movie>;
 }
