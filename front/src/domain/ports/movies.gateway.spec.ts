@@ -1,5 +1,5 @@
 import { MoviesGateway } from './movies.gateway';
-import { lastValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom, NotFoundError } from 'rxjs';
 import { InMemoryMoviesGateway } from '../adapters/in-memory-movies.gateway';
 
 let moviesGateway: MoviesGateway;
@@ -8,7 +8,7 @@ beforeEach(() => {
   moviesGateway = new InMemoryMoviesGateway();
 });
 
-describe('the movies search', () => {
+describe('movies search', () => {
   it("doesn't find anything when keywords aren't in movies titles", async () => {
     const movies = await lastValueFrom(moviesGateway.searchMovies('rouge'));
 
@@ -54,5 +54,27 @@ describe('the movies search', () => {
         usDvdSales: 0,
       },
     ]);
+  });
+});
+
+describe('movies query by id', () => {
+  it("raises an error when the given ID doesn't exists", () => {
+    expect(firstValueFrom(moviesGateway.findMovie(999))).rejects.toThrow(
+      NotFoundError
+    );
+  });
+
+  it('gives a movie when its founded', async () => {
+    const movie = await firstValueFrom(moviesGateway.findMovie(1));
+
+    expect(movie).toEqual({
+      id: 1,
+      title: 'Le Grand Bleu',
+      imdbRating: 8,
+      imdbVotes: 120,
+      rottenTomatoesRating: '80%',
+      usGross: 1000,
+      usDvdSales: 100,
+    });
   });
 });

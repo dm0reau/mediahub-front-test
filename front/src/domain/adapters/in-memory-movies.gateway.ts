@@ -1,23 +1,25 @@
 import { MoviesGateway } from '../ports/movies.gateway';
 import { Movie } from '../models/movie';
-import { NotFoundError, Observable, of } from 'rxjs';
+import { map, NotFoundError, Observable, of } from 'rxjs';
 import { MoviesList } from '../models/movies-list';
 
 export class InMemoryMoviesGateway implements MoviesGateway {
   findMovie(id: number): Observable<Movie> {
-    const dataIndex = id - 1;
-
-    if (!moviesData[dataIndex]) {
-      throw new NotFoundError(`Movie with ID ${id} not found`);
-    }
-    return of(moviesData[dataIndex]);
+    return of(id - 1).pipe(
+      map((dataIndex) => {
+        if (!moviesData[dataIndex]) {
+          throw new NotFoundError(`Movie with ID ${id} not found`);
+        }
+        return moviesData[dataIndex];
+      })
+    );
   }
 
   searchMovies(keywords: string): Observable<MoviesList> {
     return of(
-      moviesData.filter((movie) => {
-        return movie.title.toLowerCase().includes(keywords.toLowerCase());
-      })
+      moviesData.filter((movie) =>
+        movie.title.toLowerCase().includes(keywords.toLowerCase())
+      )
     );
   }
 }
