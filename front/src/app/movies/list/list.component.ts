@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MoviesListState } from './movies-list.state';
+import { MoviesListStateService } from './movies-list-state.service';
 import { MoviesList } from '../../../domain/movie/models/movies-list';
 import { Subscription } from 'rxjs';
 
@@ -12,12 +12,14 @@ export class ListComponent implements OnInit, OnDestroy {
   movies: MoviesList = [];
   private moviesSub$?: Subscription;
 
-  constructor(private readonly moviesListService: MoviesListState) {}
+  constructor(
+    private readonly moviesListStateService: MoviesListStateService
+  ) {}
 
   ngOnInit(): void {
-    this.moviesSub$ = this.moviesListService
-      .observable()
-      .subscribe((movies) => (this.movies = movies));
+    this.moviesSub$ = this.moviesListStateService
+      .getState()
+      .subscribe((state) => (this.movies = state.moviesList ?? []));
   }
 
   ngOnDestroy() {

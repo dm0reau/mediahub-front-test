@@ -1,25 +1,29 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SearchService } from '../search.service';
 import { Subscription } from 'rxjs';
+import { MoviesListStateService } from '../movies-list-state.service';
+import { SearchService } from './search.service';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
 })
 export class SearchComponent implements OnInit, OnDestroy {
-  keywords = '';
-  private keywordsSub$?: Subscription;
+  query = '';
+  private querySub$?: Subscription;
 
-  constructor(private readonly searchService: SearchService) {}
+  constructor(
+    private readonly moviesListStateService: MoviesListStateService,
+    private readonly searchService: SearchService
+  ) {}
 
   ngOnInit() {
-    this.keywordsSub$ = this.searchService
-      .keywords()
-      .subscribe((keywords) => (this.keywords = keywords));
+    this.querySub$ = this.moviesListStateService
+      .getState()
+      .subscribe((state) => (this.query = state.searchQuery ?? ''));
   }
 
   search() {
-    this.searchService.search(this.keywords);
+    this.searchService.search(this.query);
   }
 
   clear() {
@@ -27,6 +31,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.keywordsSub$?.unsubscribe();
+    this.querySub$?.unsubscribe();
   }
 }

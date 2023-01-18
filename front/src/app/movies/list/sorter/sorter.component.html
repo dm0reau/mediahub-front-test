@@ -1,1 +1,4 @@
-<span (click)="sort()">{{ title }}</span>
+<span (click)="sort()">
+  {{ title }}
+  <i *ngIf="isActive" class="bi bi-arrow-down"></i>
+</span>
