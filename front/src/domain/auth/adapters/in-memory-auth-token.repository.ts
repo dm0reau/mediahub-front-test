@@ -7,6 +7,10 @@ export class InMemoryAuthTokenRepository implements AuthTokenRepository {
     this.token = token;
   }
 
+  get(): string | null {
+    return this.hasToken() ? this.token : null;
+  }
+
   hasToken(): boolean {
     return this.token !== '';
   }

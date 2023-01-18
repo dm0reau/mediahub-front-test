@@ -7,6 +7,10 @@ export class LocalStorageAuthTokenRepository implements AuthTokenRepository {
     localStorage.setItem(LOCAL_STORAGE_KEY, token);
   }
 
+  get(): string | null {
+    return localStorage.getItem(LOCAL_STORAGE_KEY);
+  }
+
   hasToken(): boolean {
     const item = localStorage.getItem(LOCAL_STORAGE_KEY);
     return item !== null && item.length > 0;

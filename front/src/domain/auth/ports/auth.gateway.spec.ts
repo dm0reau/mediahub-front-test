@@ -1,14 +1,12 @@
 import { AuthGateway } from './auth.gateway';
-import { InMemoryAuthGateway } from '../adapters/in-memory-auth.gateway';
 import { lastValueFrom } from 'rxjs';
 import { InMemoryAuthTokenRepository } from '../adapters/in-memory-auth-token.repository';
-import { AuthTokenRepository } from './auth-token.repository';
+import { InMemoryAuthGateway } from '../adapters/in-memory-auth.gateway';
 
 let authGateway: AuthGateway;
-let authTokenRepository: AuthTokenRepository;
 
 beforeEach(() => {
-  authTokenRepository = new InMemoryAuthTokenRepository();
+  const authTokenRepository = new InMemoryAuthTokenRepository();
   authGateway = new InMemoryAuthGateway(authTokenRepository);
 });
 
