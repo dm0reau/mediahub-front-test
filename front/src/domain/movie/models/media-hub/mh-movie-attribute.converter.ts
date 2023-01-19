@@ -1,7 +1,7 @@
 import { MovieSortAttribute } from '../movie-sort-attribute';
 import { MhMovieSortAttribute } from './mh-movie-sort-attribute';
 
-export class MhMovieAttributeMapper {
+export class MhMovieAttributeConverter {
   static fromMovieAttribute(
     movieSortAttribute: MovieSortAttribute
   ): MhMovieSortAttribute {

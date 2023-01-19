@@ -1,7 +1,7 @@
 import { Movie } from '../movie';
 import { MhMovie } from './mh-movie';
 
-export class MhMovieMapper {
+export class MhMovieConverter {
   static toMovie(mhMovie: MhMovie): Movie {
     return {
       id: mhMovie.id,
