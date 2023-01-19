@@ -1,5 +1,5 @@
 import { AuthGateway } from '../ports/auth.gateway';
-import { map, Observable, of, tap } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { AuthTokenRepository } from '../ports/auth-token.repository';
 import { MhHttpClient } from '../../../infra/ports/mh-http-client';
 
@@ -36,7 +36,8 @@ export class HttpAuthGateway implements AuthGateway {
             return true;
           }
           return false;
-        })
+        }),
+        catchError(() => of(false))
       );
   }
 }
