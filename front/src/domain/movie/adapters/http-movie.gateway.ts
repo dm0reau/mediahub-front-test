@@ -23,7 +23,7 @@ export class HttpMovieGateway implements MovieGateway {
     sortBy: MovieSortAttribute
   ): Observable<MoviesList> {
     const sortQuery = MhMovieAttributeMapper.fromMovieAttribute(sortBy);
-    const uri = `movies?query=${encodeURI(query)}&sortBy${encodeURI(
+    const uri = `movies?query=${encodeURI(query)}&sortBy=${encodeURI(
       sortQuery
     )}`;
     return this.mhHttpClient

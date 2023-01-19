@@ -26,9 +26,12 @@ export class AngularMhHttpClient extends MhHttpClient {
   }
 
   protected getHeaders(): HttpHeaders {
-    const headers = new HttpHeaders();
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
     if (this.authTokenRepository.hasToken()) {
-      headers.set('Authorization', `Bearer: ${this.authTokenRepository.get()}`);
+      headers = headers.set(
+        'Authorization',
+        `Bearer ${this.authTokenRepository.get()}`
+      );
     }
     return headers;
   }

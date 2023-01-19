@@ -8,8 +8,10 @@ import { MoviesListStateService } from './list/movies-list-state.service';
 import { SearchService } from './list/search/search.service';
 import { DetailsComponent } from './details/details.component';
 import { MovieDetailsService } from './details/movie-details.service';
-import { InMemoryMovieGateway } from '../../domain/movie/adapters/in-memory-movie.gateway';
 import { SorterComponent } from './list/sorter/sorter.component';
+import { HttpClient } from '@angular/common/http';
+import { AngularMhHttpClient } from '../../infra/adapters/angular-mh-http-client';
+import { HttpMovieGateway } from '../../domain/movie/adapters/http-movie.gateway';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,11 @@ import { SorterComponent } from './list/sorter/sorter.component';
   providers: [
     {
       provide: 'MoviesGateway',
-      useClass: InMemoryMovieGateway,
+      useFactory: (httpClient: HttpClient) => {
+        const angularMhHttpClient = new AngularMhHttpClient(httpClient);
+        return new HttpMovieGateway(angularMhHttpClient);
+      },
+      deps: [HttpClient],
     },
     MoviesListStateService,
     MovieDetailsService,
