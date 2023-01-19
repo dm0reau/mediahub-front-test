@@ -1,12 +1,12 @@
 import { AuthGateway } from '../ports/auth.gateway';
 import { map, Observable, of, tap } from 'rxjs';
 import { AuthTokenRepository } from '../ports/auth-token.repository';
-import { MediaHubHttpClient } from '../../../infra/ports/media-hub-http-client';
+import { MhHttpClient } from '../../../infra/ports/mh-http-client';
 
 export class HttpAuthGateway implements AuthGateway {
   constructor(
     private readonly authTokenRepository: AuthTokenRepository,
-    private readonly mediaHubHttpClient: MediaHubHttpClient
+    private readonly mhHttpClient: MhHttpClient
   ) {}
 
   invalidate(): Observable<null> {
@@ -22,7 +22,7 @@ export class HttpAuthGateway implements AuthGateway {
   }
 
   validate(userName: string, password: string): Observable<boolean> {
-    return this.mediaHubHttpClient
+    return this.mhHttpClient
       .post<{
         token: string;
       }>('auth/login', {

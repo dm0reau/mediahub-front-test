@@ -4,10 +4,10 @@ import { Movie } from '../models/movie';
 import { MovieSortAttribute } from '../models/movie-sort-attribute';
 
 export interface MovieGateway {
-  searchMovies(keywords: string): Observable<MoviesList>;
+  searchMovies(query: string): Observable<MoviesList>;
 
   searchAndSortMovies(
-    keywords: string,
+    query: string,
     sortBy: MovieSortAttribute
   ): Observable<MoviesList>;
 

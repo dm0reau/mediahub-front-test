@@ -16,10 +16,10 @@ export class InMemoryMovieGateway implements MovieGateway {
     );
   }
 
-  searchMovies(keywords: string): Observable<MoviesList> {
+  searchMovies(query: string): Observable<MoviesList> {
     return of(
       moviesData.filter((movie) =>
-        movie.title.toLowerCase().includes(keywords.toLowerCase())
+        movie.title.toLowerCase().includes(query.toLowerCase())
       )
     );
   }

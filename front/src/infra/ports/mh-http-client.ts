@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { AuthTokenRepository } from '../../domain/auth/ports/auth-token.repository';
 
-export abstract class MediaHubHttpClient {
+export abstract class MhHttpClient {
   protected constructor(
     private readonly baseUrl: string,
     protected readonly authTokenRepository: AuthTokenRepository

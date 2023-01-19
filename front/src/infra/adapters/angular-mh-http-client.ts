@@ -1,4 +1,4 @@
-import { MediaHubHttpClient } from '../ports/media-hub-http-client';
+import { MhHttpClient } from '../ports/mh-http-client';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocalStorageAuthTokenRepository } from '../../domain/auth/adapters/local-storage-auth-token.repository';
 import { Observable } from 'rxjs';
@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 // Usually it must be in an environment variable
 const BASE_URL = 'http://localhost:3000';
 
-export class AngularMediaHubHttpClient extends MediaHubHttpClient {
+export class AngularMhHttpClient extends MhHttpClient {
   constructor(private readonly angularHttpClient: HttpClient) {
     super(BASE_URL, new LocalStorageAuthTokenRepository());
   }

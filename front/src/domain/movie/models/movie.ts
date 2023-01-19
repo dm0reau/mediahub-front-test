@@ -1,8 +1,8 @@
 export interface Movie {
   id: number;
   title: string;
-  usGross: number;
-  usDvdSales: number;
+  usGross?: number;
+  usDvdSales?: number;
   worldwideGross?: number;
   productionBudget?: number;
   releaseDate?: string;

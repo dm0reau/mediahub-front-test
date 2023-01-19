@@ -7,7 +7,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { NavComponent } from './nav/nav.component';
 import { LocalStorageAuthTokenRepository } from '../domain/auth/adapters/local-storage-auth-token.repository';
 import { HttpAuthGateway } from '../domain/auth/adapters/http-auth.gateway';
-import { AngularMediaHubHttpClient } from '../infra/adapters/angular-media-hub-http-client';
+import { AngularMhHttpClient } from '../infra/adapters/angular-mh-http-client';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -17,12 +17,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     {
       provide: 'AuthGateway',
       useFactory: (httpClient: HttpClient) => {
-        const angularMediaHubHttpClient = new AngularMediaHubHttpClient(
-          httpClient
-        );
+        const angularMhHttpClient = new AngularMhHttpClient(httpClient);
         return new HttpAuthGateway(
           new LocalStorageAuthTokenRepository(),
-          angularMediaHubHttpClient
+          angularMhHttpClient
         );
       },
       deps: [HttpClient],
